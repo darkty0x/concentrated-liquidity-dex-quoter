@@ -154,4 +154,49 @@ describe("Vault", function () {
 
         expect(await vault.whitelistedTokens(token.address)).to.equal(false);
     });
+
+    it('should allow only owner to whitelist token', async () => {
+        // Ensure that the token is not whitelisted initially
+        expect(await vault.whitelistedTokens(token.address)).to.equal(false);
+
+        // Trying to whitelist the token as a non-owner should revert
+        await expect(
+            vault.connect(user).whitelistToken(token.address)
+        ).to.be.revertedWith('Ownable: caller is not the owner');
+
+        // Ensure that the token is still not whitelisted after the attempted operation
+        expect(await vault.whitelistedTokens(token.address)).to.equal(false);
+
+        // Whitelist the token as the owner
+        await expect(
+            vault.connect(owner).whitelistToken(token.address)
+        ).to.emit(vault, 'TokenWhitelisted').withArgs(token.address);
+
+        // Ensure that the token is now whitelisted
+        expect(await vault.whitelistedTokens(token.address)).to.equal(true);
+    });
+
+    it('should allow only owner to remove token from whitelist', async () => {
+        // Whitelist the token initially
+        await vault.connect(owner).whitelistToken(token.address);
+
+        // Ensure that the token is whitelisted
+        expect(await vault.whitelistedTokens(token.address)).to.equal(true);
+
+        // Trying to remove the token from the whitelist as a non-owner should revert
+        await expect(
+            vault.connect(user).removeTokenFromWhitelist(token.address)
+        ).to.be.revertedWith('Ownable: caller is not the owner');
+
+        // Ensure that the token is still whitelisted after the attempted operation
+        expect(await vault.whitelistedTokens(token.address)).to.equal(true);
+
+        // Remove the token from the whitelist as the owner
+        await expect(
+            vault.connect(owner).removeTokenFromWhitelist(token.address)
+        ).to.emit(vault, 'TokenRemovedFromWhitelist').withArgs(token.address);
+
+        // Ensure that the token is no longer whitelisted
+        expect(await vault.whitelistedTokens(token.address)).to.equal(false);
+    });
 });
