@@ -116,7 +116,7 @@ Feel free to contribute to the development of this project. Follow these steps:
 5. Submit a pull request.
 
 ## License
-This project is licensed under the MIT License - see the LICENSE file for details.
+This project is licensed under the MIT License - see the [LICENSE](https://github.com/kazunetakeda25/simple-vault/blob/main/LICENSE) file for details.
 
 
 ## Note
