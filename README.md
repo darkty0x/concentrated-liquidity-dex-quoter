@@ -122,3 +122,6 @@ This project is licensed under the MIT License - see the [LICENSE](https://githu
 ## Note
 
 Coverage is not 100% because Else paths for modifiers (`nonReentrant`, `onlyOwner`) were not tested since they are from OpenZeppelin. These modifiers are widely used and thoroughly tested in the OpenZeppelin library, which is a trusted and well-established collection of reusable smart contract components. As a result, I have focused my testing efforts on the specific logic and functionalities unique to this Vault contract.
+Here is the screenshot:
+![image](https://github.com/kazunetakeda25/simple-vault/assets/58710601/6f0ca1bd-6392-4e3c-85bd-8182d1e3df54)
+
