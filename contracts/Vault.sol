@@ -25,6 +25,7 @@ contract Vault is IVault, Ownable, Pausable, ReentrancyGuard {
     using SafeERC20 for IERC20;
 
     mapping(address => bool) public whitelistedTokens;
+    mapping(address => mapping(address => uint256)) private userDeposits;
 
     /**
      * @dev Fallback function to revert accidental transfers.
@@ -50,6 +51,8 @@ contract Vault is IVault, Ownable, Pausable, ReentrancyGuard {
             revert ERR_INVALID_AMOUNT();
         }
 
+        userDeposits[_token][msg.sender] += _amount;
+
         IERC20(_token).safeTransferFrom(msg.sender, address(this), _amount);
 
         emit Deposit(msg.sender, _token, _amount);
@@ -71,6 +74,12 @@ contract Vault is IVault, Ownable, Pausable, ReentrancyGuard {
         if (_amount == 0) {
             revert ERR_INVALID_AMOUNT();
         }
+
+        if (userDeposits[_token][msg.sender] < _amount) {
+            revert ERR_INVALID_AMOUNT();
+        }
+
+        userDeposits[_token][msg.sender] -= _amount;
 
         IERC20(_token).safeTransfer(msg.sender, _amount);
 
