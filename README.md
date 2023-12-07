@@ -119,13 +119,11 @@ Feel free to contribute to the development of this project. Follow these steps:
 This project is licensed under the MIT License - see the [LICENSE](https://github.com/kazunetakeda25/simple-vault/blob/main/LICENSE) file for details.
 
 
-## Note
-
-Coverage is not 100% because Else paths for modifiers (`nonReentrant`, `onlyOwner`) were not tested since they are from OpenZeppelin. These modifiers are widely used and thoroughly tested in the OpenZeppelin library, which is a trusted and well-established collection of reusable smart contract components. As a result, I have focused my testing efforts on the specific logic and functionalities unique to this Vault contract.
+## Coverage Result
 
   Vault
 
-    ✔ should only allow a user to withdraw the amount they deposited (109ms)
+    ✔ should only allow a user to withdraw the amount they deposited (113ms)
 
     ✔ should revert when depositing a non-whitelisted token
 
@@ -135,13 +133,15 @@ Coverage is not 100% because Else paths for modifiers (`nonReentrant`, `onlyOwne
 
     ✔ should revert when withdrawing with amount equal to 0
 
-    ✔ should deposit and withdraw tokens (52ms)
+    ✔ should deposit and withdraw tokens (64ms)
 
-    ✔ should not revert when token is whitelisted
+    ✔ should not revert when token is whitelisted (44ms)
 
     ✔ should pause and unpause the vault
 
-    ✔ should not allow deposit when paused
+    ✔ should allow only owner to pause and unpause (53ms)
+
+    ✔ should not allow deposit when paused (38ms)
 
     ✔ should not allow withdraw when paused
 
@@ -149,14 +149,19 @@ Coverage is not 100% because Else paths for modifiers (`nonReentrant`, `onlyOwne
 
     ✔ should whitelist and remove tokens
 
-  12 passing (506ms)
+    ✔ should allow only owner to whitelist token
+
+    ✔ should allow only owner to remove token from whitelist (40ms)
+
+
+  15 passing (720ms)
 
 File                   |  % Stmts | % Branch |  % Funcs |  % Lines |Uncovered Lines |
 -----------------------|----------|----------|----------|----------|----------------|
- contracts/            |      100 |    78.57 |      100 |       96 |                |
-  Vault.sol            |      100 |    78.57 |      100 |       96 |             34 |
+ contracts/            |      100 |    92.86 |      100 |       96 |                |
+  Vault.sol            |      100 |    92.86 |      100 |       96 |             34 |
  contracts/Mock/       |      100 |      100 |      100 |      100 |                |
   MockERC20.sol        |      100 |      100 |      100 |      100 |                |
  contracts/interfaces/ |      100 |      100 |      100 |      100 |                |
   IVault.sol           |      100 |      100 |      100 |      100 |                |
-All files              |      100 |    71.43 |      100 |    96.15 |                |
+All files              |      100 |    92.86 |      100 |    96.15 |                |
