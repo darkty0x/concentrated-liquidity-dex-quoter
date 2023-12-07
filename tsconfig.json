@@ -1,0 +1,15 @@
+{
+    "compilerOptions": {
+      "target": "ES2019",
+      "module": "NodeNext",
+      "strict": true,
+      "esModuleInterop": true,
+      "skipLibCheck": true,
+      "forceConsistentCasingInFileNames": true,
+      "outDir": "./dist",
+      "moduleResolution": "NodeNext"
+    },
+    "include": ["./scripts", "./test"],
+    "files": ["./hardhat.config.ts"]
+  }
+  

@@ -1,0 +1,67 @@
+{
+  "name": "simple-vault",
+  "version": "1.0.0",
+  "description": "A simple Vault contract with specific requirements (Tsunami Test)",
+  "directories": {
+    "test": "test"
+  },
+  "main": "hardhat.config.ts",
+  "scripts": {
+    "lint": "eslint \"**/*.{js,ts}\" && solhint src/**/*.sol",
+    "lint:fix": "eslint --fix \"**/*.{js,ts}\" && solhint --fix src/**/*.sol",
+    "lint:sol": "solhint -f table contracts/**/*.sol",
+    "format": "prettier --check \"**/*.{ts,js,sol}\"",
+    "format:fix": "prettier --write \"**/*.{ts,js,sol}\"",
+    "compile": "hardhat compile",
+    "clean": "hardhat clean",
+    "test": "hardhat test --network hardhat",
+    "gas": "REPORT_GAS=true hardhat test",
+    "coverage": "hardhat coverage",
+    "coverage:unit": "hardhat coverage --testfiles test/unit/*.test.js",
+    "typechain": "TS_NODE_TRANSPILE_ONLY=true hardhat typechain",
+    "fork": "hardhat node",
+    "prestart": "yarn run typechain",
+    "start": "hardhat node --network hardhat"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kazunetakeda25/simple-vault.git"
+  },
+  "keywords": [
+    "hardhat",
+    "ethereum",
+    "simple",
+    "vault",
+    "tsunami"
+  ],
+  "author": "kazunetakeda25",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kazunetakeda25/simple-vault.git/issues"
+  },
+  "homepage": "https://github.com/kazunetakeda25/simple-vault.git#readme",
+  "devDependencies": {
+    "@nomicfoundation/hardhat-chai-matchers": "^1.0.4",
+    "@nomicfoundation/hardhat-network-helpers": "^1.0.6",
+    "@nomicfoundation/hardhat-toolbox": "^2.0.0",
+    "@nomiclabs/hardhat-ethers": "^2.2.1",
+    "@nomiclabs/hardhat-etherscan": "^3.1.2",
+    "@typechain/ethers-v5": "^10.1.1",
+    "@typechain/hardhat": "^6.1.4",
+    "@types/chai": "^4.3.4",
+    "@types/mocha": "^9.1.1",
+    "@types/node": "^18.11.9",
+    "chai": "^4.3.7",
+    "dotenv": "^16.3.1",
+    "ethers": "^5.7.2",
+    "hardhat": "^2.19.0",
+    "hardhat-gas-reporter": "^1.0.9",
+    "solidity-coverage": "^0.8.2",
+    "ts-node": "^10.9.1",
+    "typechain": "^8.1.1",
+    "typescript": "^4.9.3"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "^4.9.3"
+  }
+}
