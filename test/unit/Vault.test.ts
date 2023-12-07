@@ -105,6 +105,20 @@ describe("Vault", function () {
         expect(await vault.paused()).to.equal(false);
     });
 
+    it('should not allow deposit when paused', async () => {
+        // Whitelist the token
+        await vault.connect(owner).whitelistToken(token.address);
+        await vault.connect(owner).pause();
+
+        // Ensure the contract is paused
+        expect(await vault.paused()).to.equal(true);
+
+        // Trying to deposit when paused should revert
+        await expect(
+            vault.connect(user).deposit(token.address, 50)
+        ).to.be.revertedWith('Pausable: paused');
+    });
+
     it('should revert when whitelisting address(0)', async () => {
         // Ensure that the token is not whitelisted initially
         expect(await vault.whitelistedTokens(ethers.constants.AddressZero)).to.equal(false);
