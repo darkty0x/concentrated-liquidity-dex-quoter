@@ -14,6 +14,7 @@ import "./interfaces/IVault.sol";
 error ERR_ETH_NOT_ACCEPTED();
 error ERR_INVALID_AMOUNT();
 error ERR_TOKEN_NOT_WHITELISTED(address token);
+error ERR_ZERO_ADDRESS();
 
 /**
  * @title Vault
@@ -95,6 +96,10 @@ contract Vault is IVault, Ownable, Pausable, ReentrancyGuard {
      * @param _token The address of the ERC-20 token to whitelist.
      */
     function whitelistToken(address _token) external onlyOwner {
+        if (_token == address(0)) {
+            revert ERR_ZERO_ADDRESS();
+        }
+
         whitelistedTokens[_token] = true;
 
         emit TokenWhitelisted(_token);

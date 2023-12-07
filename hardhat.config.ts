@@ -16,9 +16,9 @@ const config: HardhatUserConfig = {
   networks: {
     hardhat: {
       chainId: 1337,
-      forking: {
-        url: process.env.ALCHEMY_RPC_URL,
-      },
+      // forking: {
+      //   url: process.env.ALCHEMY_RPC_URL,
+      // },
     },
   },
   paths: {
