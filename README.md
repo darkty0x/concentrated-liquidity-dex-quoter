@@ -36,6 +36,11 @@ Make sure you have [Node.js](https://nodejs.org/) installed.
 
 ```bash
 npm install
+```
+or
+```bash
+yarn
+```
 
 ## Usage
 
@@ -43,21 +48,37 @@ npm install
 
 ```bash
 npm run compile
+```
+or
+```bash
+yarn compile
+```
 
 ### Run Tests:
 
 ```bash
 npm test
+```
+or
+```bash
+yarn test
+```
 
 ### To generate a gas usage report:
 
 ```bash
 npm run gas
+```
 
 ### To generate a test coverage report:
 
 ```bash
 npm run coverage
+```
+or
+```bash
+yarn coverage
+```
 
 ## Local Development:
 
@@ -65,11 +86,21 @@ npm run coverage
 
 ```bash
 npm run start
+```
+or
+```bash
+yarn start
+```
 
 ### Deploy the contract to the local network:
 
 ```bash
 npm run deploy:local
+```
+or
+```bash
+yarn deploy:local
+```
 
 ## Contributing
 Feel free to contribute to the development of this project. Follow these steps:
