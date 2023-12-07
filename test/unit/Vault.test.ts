@@ -119,6 +119,13 @@ describe("Vault", function () {
         ).to.be.revertedWith('Pausable: paused');
     });
 
+    it('should not allow withdraw when paused', async () => {
+        // Trying to withdraw when paused should revert
+        await expect(
+            vault.connect(user).withdraw(token.address, 25)
+        ).to.be.revertedWith('Pausable: paused');
+    });
+
     it('should revert when whitelisting address(0)', async () => {
         // Ensure that the token is not whitelisted initially
         expect(await vault.whitelistedTokens(ethers.constants.AddressZero)).to.equal(false);
