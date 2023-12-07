@@ -1,6 +1,6 @@
 # Vault contract
 
-A simple Vault contract with specific requirements (Tsunami Test)
+A simple Vault contract with specific requirements
 
 ## Requirements
 
