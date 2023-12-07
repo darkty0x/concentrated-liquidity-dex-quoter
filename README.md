@@ -141,22 +141,22 @@ Coverage is not 100% because Else paths for modifiers (`nonReentrant`, `onlyOwne
 
     ✔ should pause and unpause the vault
 
+    ✔ should not allow deposit when paused
+
+    ✔ should not allow withdraw when paused
+
     ✔ should revert when whitelisting address(0)
 
     ✔ should whitelist and remove tokens
 
-  10 passing (506ms)
+  12 passing (506ms)
 
 File                   |  % Stmts | % Branch |  % Funcs |  % Lines |Uncovered Lines |
 -----------------------|----------|----------|----------|----------|----------------|
- contracts/            |      100 |    71.43 |      100 |       96 |                |
-  Vault.sol            |      100 |    71.43 |      100 |       96 |             34 |
+ contracts/            |      100 |    78.57 |      100 |       96 |                |
+  Vault.sol            |      100 |    78.57 |      100 |       96 |             34 |
  contracts/Mock/       |      100 |      100 |      100 |      100 |                |
   MockERC20.sol        |      100 |      100 |      100 |      100 |                |
  contracts/interfaces/ |      100 |      100 |      100 |      100 |                |
   IVault.sol           |      100 |      100 |      100 |      100 |                |
 All files              |      100 |    71.43 |      100 |    96.15 |                |
-
-![image](https://github.com/kazunetakeda25/simple-vault/assets/58710601/2605b2d5-6ab9-4b1c-a952-2aad70eed293)
-
-
