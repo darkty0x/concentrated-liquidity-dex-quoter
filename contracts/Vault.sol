@@ -25,7 +25,7 @@ contract Vault is IVault, Ownable, Pausable, ReentrancyGuard {
     using SafeERC20 for IERC20;
 
     mapping(address => bool) public whitelistedTokens;
-    mapping(address => mapping(address => uint256)) private userDeposits;
+    mapping(address => mapping(address => uint256)) public userDeposits;
 
     /**
      * @dev Fallback function to revert accidental transfers.

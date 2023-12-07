@@ -5,6 +5,7 @@ import { Contract, Signer } from "ethers";
 describe("Vault", function () {
     let owner: Signer;
     let user: Signer;
+    let user2: Signer;
     let vault: Contract;
     let token: Contract;
 
