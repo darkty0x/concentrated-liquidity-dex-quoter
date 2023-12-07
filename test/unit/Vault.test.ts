@@ -105,6 +105,43 @@ describe("Vault", function () {
         expect(await vault.paused()).to.equal(false);
     });
 
+    it('should allow only owner to pause and unpause', async () => {
+        // Ensure the contract is initially unpaused
+        expect(await vault.paused()).to.equal(false);
+
+        // Trying to pause the contract as a non-owner should revert
+        await expect(
+            vault.connect(user).pause()
+        ).to.be.revertedWith('Ownable: caller is not the owner');
+
+        // Ensure the contract is still unpaused after the attempted operation
+        expect(await vault.paused()).to.equal(false);
+
+        // Pause the contract as the owner
+        await expect(
+            vault.connect(owner).pause()
+        ).to.emit(vault, 'Paused');
+
+        // Ensure the contract is now paused
+        expect(await vault.paused()).to.equal(true);
+
+        // Trying to unpause the contract as a non-owner should revert
+        await expect(
+            vault.connect(user).unpause()
+        ).to.be.revertedWith('Ownable: caller is not the owner');
+
+        // Ensure the contract is still paused after the attempted operation
+        expect(await vault.paused()).to.equal(true);
+
+        // Unpause the contract as the owner
+        await expect(
+            vault.connect(owner).unpause()
+        ).to.emit(vault, 'Unpaused');
+
+        // Ensure the contract is now unpaused
+        expect(await vault.paused()).to.equal(false);
+    });
+
     it('should not allow deposit when paused', async () => {
         // Whitelist the token
         await vault.connect(owner).whitelistToken(token.address);
