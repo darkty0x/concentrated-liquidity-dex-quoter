@@ -152,6 +152,8 @@ deployments/**/solcinputs
 
 /.dapp
 
+# Typechain types
+typechain-types
 
 # OpenZeppelin upgradeable files
 .openzeppelin/unknown-*.json
