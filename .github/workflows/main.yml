@@ -33,9 +33,8 @@ jobs:
       - name: Check coverage threshold
         run: |
           COVERAGE=$(awk '/^All files/{print int($NF)}' coverage/lcov-report/index.html)
-          if (( $COVERAGE >= 90 )); then
-
-            echo "Coverage is above 90%"
+          if [ $COVERAGE -ge 90 ]; then
+            echo "Coverage is above or equal to 90%"
           else
             echo "Error: Coverage is below 90%"
             exit 1
