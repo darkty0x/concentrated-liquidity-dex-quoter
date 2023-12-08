@@ -1,0 +1,41 @@
+name: Run Tests and Coverage
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '14'
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Run tests
+        run: yarn test
+
+      - name: Run coverage
+        run: yarn coverage
+
+      - name: Check coverage threshold
+        run: |
+          COVERAGE=$(awk '/^All files/{print $NF}' coverage/lcov-report/index.html)
+          if (( $(echo "$COVERAGE >= 90" | bc -l) )); then
+            echo "Coverage is above 90%"
+          else
+            echo "Error: Coverage is below 90%"
+            exit 1
+          fi
