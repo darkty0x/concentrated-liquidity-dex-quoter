@@ -29,13 +29,3 @@ jobs:
 
       - name: Run coverage
         run: yarn coverage
-
-      - name: Check coverage threshold
-        run: |
-          COVERAGE=$(awk -F '[<>]' '/Lines/{split($6, arr, "/"); print int((arr[1]/arr[2]) * 100)}' coverage/lcov-report/index.html)
-          if [ "$COVERAGE" -ge 90 ]; then
-            echo "Coverage is above 90%"
-          else
-            echo "Error: Coverage is below 90%"
-            exit 1
-          fi

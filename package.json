@@ -16,7 +16,7 @@
     "clean": "hardhat clean",
     "test": "hardhat test --network hardhat",
     "gas": "REPORT_GAS=true hardhat test",
-    "coverage": "hardhat coverage",
+    "coverage": "hardhat coverage && istanbul check-coverage --statements 100 --branches 90 --functions 100 --lines 90",
     "coverage:unit": "hardhat coverage --testfiles test/unit/*.test.js",
     "typechain": "TS_NODE_TRANSPILE_ONLY=true hardhat typechain",
     "fork": "hardhat node",
