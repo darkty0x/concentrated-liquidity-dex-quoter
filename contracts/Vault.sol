@@ -67,23 +67,23 @@ contract Vault is IVault, Ownable, Pausable, ReentrancyGuard {
         address _token,
         uint256 _amount
     ) external nonReentrant whenNotPaused {
-        if (!whitelistedTokens[_token]) {
-            revert ERR_TOKEN_NOT_WHITELISTED(_token);
-        }
-
         if (_amount == 0) {
             revert ERR_INVALID_AMOUNT();
         }
 
-        if (userDeposits[_token][msg.sender] < _amount) {
-            revert ERR_INVALID_AMOUNT();
+        uint256 withdrawAmount;
+
+        if (_amount >= userDeposits[_token][msg.sender]) {
+            withdrawAmount = userDeposits[_token][msg.sender];
+            delete userDeposits[_token][msg.sender];
+        } else {
+            withdrawAmount = _amount;
+            userDeposits[_token][msg.sender] -= withdrawAmount;
         }
 
-        userDeposits[_token][msg.sender] -= _amount;
+        IERC20(_token).safeTransfer(msg.sender, withdrawAmount);
 
-        IERC20(_token).safeTransfer(msg.sender, _amount);
-
-        emit Withdrawal(msg.sender, _token, _amount);
+        emit Withdrawal(msg.sender, _token, withdrawAmount);
     }
 
     /**

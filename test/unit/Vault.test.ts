@@ -2,10 +2,9 @@ import { expect } from "chai";
 import { ethers } from "hardhat";
 import { Contract, Signer } from "ethers";
 
-describe("Vault", function () {
+describe("Vault Unit Test", function () {
     let owner: Signer;
     let user: Signer;
-    let user2: Signer;
     let vault: Contract;
     let token: Contract;
 
@@ -28,16 +27,6 @@ describe("Vault", function () {
         // Trying to deposit without whitelisting the token should revert
         await expect(
             vault.connect(user).deposit(token.address, 50)
-        ).to.be.revertedWithCustomError(vault, "ERR_TOKEN_NOT_WHITELISTED");
-    });
-
-    it('should revert when withdrawing a non-whitelisted token', async () => {
-        // Ensure that the token is not whitelisted initially
-        expect(await vault.whitelistedTokens(token.address)).to.equal(false);
-
-        // Trying to withdraw without whitelisting the token should revert
-        await expect(
-            vault.connect(user).withdraw(token.address, 25)
         ).to.be.revertedWithCustomError(vault, "ERR_TOKEN_NOT_WHITELISTED");
     });
 
